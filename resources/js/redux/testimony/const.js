@@ -1,0 +1,5 @@
+export default {
+    LOAD:'LOAD',
+    SAVE_BACKUP:'SAVE_BACKUP',
+    RESTORE_BACKUP:'RESTORE_BACKUP',
+}

@@ -1,0 +1,24 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+@import '~react-animated-slider/build/horizontal.css';
+@import '../css/slider.css';
+
+@import '../../semantic/dist/semantic.min.css';
+@import './helpers.css';
+@import './svg_map.css';
+
+.search .results{
+	overflow-y: auto;
+    max-height: 400px;
+}
+
+.ck-file-dialog-button{
+	display:none !important;
+}

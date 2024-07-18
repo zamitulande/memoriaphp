@@ -1,0 +1,14 @@
+.svg_departamento{
+	cursor: pointer;
+	transition: .3s;
+	opacity: 1;
+}
+
+.svg_departamento.active_dpto{
+	fill: #01579b;
+	opacity: 1;
+}
+
+.svg_departamento:hover{
+	opacity: .8;
+}

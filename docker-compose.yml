@@ -1,0 +1,90 @@
+version: '3'
+services:
+  
+  #PHP Service
+  app:
+    build:
+      args:
+        user: oral
+        uid: 1000
+      context: .
+      dockerfile: Dockerfile
+    image: memoria-oral
+    container_name: memoria-oral
+    restart: unless-stopped
+    tty: true
+    environment:
+      - DATABASE_HOST=${DB_HOST}
+      - DATABASE_PORT=${DB_PORT}
+      - DATABASE_NAME=${DB_DATABASE}
+      - DATABASE_USER=${DB_USERNAME}
+      - DATABASE_PASSWORD=${DB_PASSWORD}
+      - SERVICE_NAME= memoria-oral
+      - SERVICE_TAGS= dev
+    working_dir: /var/www
+    # command: bash -c "composer install --ignore-platform-req=ext-zip && php-fpm"
+    volumes:
+      - ./:/var/www
+      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - app-network
+
+
+  #Nginx Service
+  webserver:
+    image: nginx:latest
+    container_name: web-server
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./nginx-logs:/var/log/nginx
+    networks:
+      - app-network
+
+  #MySQL Service
+  db:
+    image: mysql:8.0.1
+    container_name: db-oral
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3307:3307"
+    environment:
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - dbdata:/var/lib/mysql
+      # - ./mysql/my.cnf:/etc/mysql/my.cnf
+    networks:
+      - app-network
+
+  #phpMyAdmin Service
+  phpmyadmin:
+    restart: always
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin-oral
+    ports:
+      - "8082:80"
+    environment:
+      PMA_HOST: ${DB_HOST}
+      PMA_PORT: ${DB_PORT}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    cpus: 0.5
+    mem_limit: "256m"
+    networks:
+      - app-network
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
+#Volumes
+volumes:
+  dbdata:
+    driver: local
