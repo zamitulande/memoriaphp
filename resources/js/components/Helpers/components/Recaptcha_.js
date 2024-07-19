@@ -19,7 +19,7 @@ class Recaptcha_ extends Component {
 	    return (		   
 		      <ReCAPTCHA
 		        ref={recaptchaRef}
-		        sitekey="6LdlWBMqAAAAAObjHpgv4loCscQzqaeZ_mjGtC6q"
+		        sitekey="6Le9cBMqAAAAAOFjz0lb29DCcZ6E8MIoYuh0RYiC"
 		        onChange={this.handleChange}
 		      />	    	       
 	    )
