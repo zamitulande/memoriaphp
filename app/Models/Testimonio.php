@@ -102,7 +102,7 @@ class Testimonio extends Model
 
 	    	foreach ($anexos as $anexo) {
 			    if($request->hasFile('anexos_valores_'.$anexo->name)){
-			    	$data['anexos_valores_'.$anexo->name] = "file|max:1024|mimes:jpg,jpeg,png";
+			    	$data['anexos_valores_'.$anexo->name] = "file|max:3072|mimes:jpg,jpeg,png";
 		        }
 		    }
 		}

@@ -568,7 +568,7 @@ class Annexes extends Component {
 					    header='Imágenes del testimonio'
 					    content={<Segment basic className="no-padding">
 					    	<p>Utilice este panel para agregar y seleccionar las imágenes que describen gráficamente el testimonio.</p>
-					    	<p>El tamaño máximo permitido para las imágenes es de 1 Mb</p>
+					    	<p>El tamaño máximo permitido para las imágenes es de 3 Mb</p>
 					    	</Segment>
 						}
 					  />
